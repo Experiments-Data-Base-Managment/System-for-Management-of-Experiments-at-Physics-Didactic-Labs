@@ -4,11 +4,9 @@
   <requires lib="gtk+" version="3.12"/>
   <object class="GtkListStore" id="tabela_resultados">
     <columns>
-      <!-- column-name volts -->
-      <column type="gfloat"/>
-      <!-- column-name seconds -->
-      <column type="gint"/>
-      <!-- column-name Teste -->
+      <!-- column-name Tempo (s) -->
+      <column type="gchararray"/>
+      <!-- column-name Tensão (v) -->
       <column type="gchararray"/>
     </columns>
   </object>
@@ -103,6 +101,7 @@
                           <object class="GtkTreeView" id="tree_view">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
+                            <property name="hscroll_policy">natural</property>
                             <property name="model">tabela_resultados</property>
                             <property name="search_column">2</property>
                             <property name="enable_grid_lines">both</property>
@@ -123,11 +122,6 @@
                                 <property name="sizing">autosize</property>
                                 <property name="title" translatable="yes">Second</property>
                                 <property name="expand">True</property>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkTreeViewColumn" id="treeviewcolumn1">
-                                <property name="title" translatable="yes">Teste</property>
                               </object>
                             </child>
                           </object>

@@ -39,8 +39,13 @@ class WindowResultExperiment:
 		
 		
 		while (self.index < len(self.set_results.get_measurements())):
-			self.data = self.set_results.get_specific_measurement(self.index).split(';')
-			self.insert_data_table(self.data[0], self.data[1])
+			
+			self.times_and_volts = self.set_results.get_specific_measurement(self.index).split('|')
+			
+			for i in range(0,len(self.times_and_volts)-1):
+				self.times_and_volts[i] = self.times_and_volts[i].split(';')
+				self.insert_data_table(self.times_and_volts[i][0], self.times_and_volts[i][1])
+			
 			self.index += 1
 		
 			
@@ -54,13 +59,20 @@ class WindowResultExperiment:
 	def show_window(self):
 		self.window.start_window()
 		Gtk.main()
-
+	
+	'''
+		Os métodos a partir deste ponto do código lidam com a estrutura de tabela
+		apresentada na tela de resultados.
+	'''
 	def set_table(self, table):	 
 		self.table = table
 	
 	def set_tree_view(self, treeView):
 		self.treeView = treeView
-
+	
+	'''
+		Método que cria o número de colunas da tabela de resultados e define o tipo de dado
+	'''
 	def create_columns(self):
 		cell = Gtk.CellRendererText()
 		self.treeView.get_column(0).pack_start(cell, False)
@@ -68,7 +80,7 @@ class WindowResultExperiment:
 		self.treeView.get_column(1).pack_start(cell, False)
 		self.treeView.get_column(1).add_attribute(cell, "text", 1)
 
-
+	
 	def insert_data_table(self, volt, seconds):
 		'''
 			iter_tree = table.get_iter_first();		
@@ -81,7 +93,7 @@ class WindowResultExperiment:
 			else:
 		'''
 		
-		iter_tree = self.table.prepend([seconds,volt])
+		iter_tree = self.table.prepend([volt,seconds])
 		
 		'''
 			self.table.row_changed(iter_tree,iter_tree)

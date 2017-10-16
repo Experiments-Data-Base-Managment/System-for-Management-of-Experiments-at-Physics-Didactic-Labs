@@ -12,9 +12,13 @@ class SerialCommunication:
 	
 	REQUEST_DURATION = '2'
 	
+	
+	'''
+		Abre a porta serial, aguarda 1.8 segundos e limpa o buffer
+	'''
 	def __init__(self):
 	
-		self.channel = serial.Serial('/dev/ttyACM0',9600)
+		self.channel = serial.Serial('/dev/ttyACM0',14400)
 	
 		time.sleep(1.8)
 		

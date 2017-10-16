@@ -4,9 +4,9 @@
   <requires lib="gtk+" version="3.12"/>
   <object class="GtkListStore" id="tabela_resultados">
     <columns>
-      <!-- column-name Tempo (s) -->
+      <!-- column-name Tempo -->
       <column type="gchararray"/>
-      <!-- column-name Tensão (v) -->
+      <!-- column-name Tensão -->
       <column type="gchararray"/>
     </columns>
   </object>
@@ -112,7 +112,7 @@
                               <object class="GtkTreeViewColumn" id="column_volts">
                                 <property name="resizable">True</property>
                                 <property name="sizing">autosize</property>
-                                <property name="title" translatable="yes">Volt</property>
+                                <property name="title" translatable="yes">Second</property>
                                 <property name="expand">True</property>
                               </object>
                             </child>
@@ -120,7 +120,7 @@
                               <object class="GtkTreeViewColumn" id="column_second">
                                 <property name="resizable">True</property>
                                 <property name="sizing">autosize</property>
-                                <property name="title" translatable="yes">Second</property>
+                                <property name="title" translatable="yes">Volt</property>
                                 <property name="expand">True</property>
                               </object>
                             </child>
