@@ -4,17 +4,19 @@
   <requires lib="gtk+" version="3.12"/>
   <object class="GtkListStore" id="tabela_resultados">
     <columns>
-      <!-- column-name Tempo (s) -->
+      <!-- column-name Tempo -->
       <column type="gchararray"/>
-      <!-- column-name Tensão (v) -->
+      <!-- column-name Tensão -->
       <column type="gchararray"/>
     </columns>
   </object>
   <object class="GtkWindow" id="result_window">
-    <property name="width_request">800</property>
-    <property name="height_request">600</property>
+    <property name="width_request">1530</property>
+    <property name="height_request">720</property>
     <property name="can_focus">False</property>
     <property name="window_position">center</property>
+    <property name="default_width">1366</property>
+    <property name="default_height">720</property>
     <child>
       <object class="GtkBox" id="box2">
         <property name="visible">True</property>
@@ -25,7 +27,8 @@
           <object class="GtkLabel" id="label5">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="margin_top">4</property>
+            <property name="margin_top">11</property>
+            <property name="margin_bottom">4</property>
             <property name="label" translatable="yes">Resultado do Experimento</property>
             <attributes>
               <attribute name="font-desc" value="&lt;Enter Value&gt; 18"/>
@@ -49,35 +52,69 @@
                 <property name="can_focus">False</property>
                 <property name="margin_left">5</property>
                 <property name="orientation">vertical</property>
-                <property name="spacing">6</property>
+                <property name="spacing">13</property>
                 <child>
                   <object class="GtkBox" id="box5">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="homogeneous">True</property>
+                    <property name="margin_top">5</property>
                     <child>
                       <object class="GtkLabel" id="label2">
+                        <property name="width_request">277</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
+                        <property name="halign">start</property>
                         <property name="label" translatable="yes">Carga Capacitor</property>
+                        <attributes>
+                          <attribute name="style" value="normal"/>
+                          <attribute name="weight" value="bold"/>
+                          <attribute name="size" value="13000"/>
+                        </attributes>
                       </object>
                       <packing>
-                        <property name="expand">True</property>
+                        <property name="expand">False</property>
                         <property name="fill">True</property>
                         <property name="position">0</property>
                       </packing>
                     </child>
                     <child>
                       <object class="GtkLabel" id="label3">
+                        <property name="width_request">470</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="label" translatable="yes">Outros Resultados</property>
+                        <property name="halign">start</property>
+                        <property name="label" translatable="yes">Variáveis do Experimento</property>
+                        <attributes>
+                          <attribute name="style" value="normal"/>
+                          <attribute name="weight" value="bold"/>
+                          <attribute name="size" value="13000"/>
+                        </attributes>
                       </object>
                       <packing>
-                        <property name="expand">True</property>
+                        <property name="expand">False</property>
                         <property name="fill">True</property>
                         <property name="pack_type">end</property>
                         <property name="position">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="label4">
+                        <property name="width_request">770</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="halign">start</property>
+                        <property name="label" translatable="yes">Gráfico do Processo de Carga</property>
+                        <property name="ellipsize">end</property>
+                        <attributes>
+                          <attribute name="style" value="normal"/>
+                          <attribute name="weight" value="bold"/>
+                          <attribute name="size" value="13000"/>
+                        </attributes>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">2</property>
                       </packing>
                     </child>
                   </object>
@@ -91,11 +128,13 @@
                   <object class="GtkBox" id="box6">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="homogeneous">True</property>
                     <child>
                       <object class="GtkScrolledWindow" id="scrolledwindow1">
+                        <property name="width_request">277</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
+                        <property name="margin_left">6</property>
+                        <property name="margin_right">8</property>
                         <property name="shadow_type">etched-out</property>
                         <child>
                           <object class="GtkTreeView" id="tree_view">
@@ -103,6 +142,7 @@
                             <property name="can_focus">True</property>
                             <property name="hscroll_policy">natural</property>
                             <property name="model">tabela_resultados</property>
+                            <property name="reorderable">True</property>
                             <property name="search_column">2</property>
                             <property name="enable_grid_lines">both</property>
                             <child internal-child="selection">
@@ -111,39 +151,269 @@
                             <child>
                               <object class="GtkTreeViewColumn" id="column_volts">
                                 <property name="resizable">True</property>
-                                <property name="sizing">autosize</property>
-                                <property name="title" translatable="yes">Volt</property>
+                                <property name="sizing">fixed</property>
+                                <property name="title" translatable="yes">Second</property>
                                 <property name="expand">True</property>
+                                <property name="reorderable">True</property>
                               </object>
                             </child>
                             <child>
                               <object class="GtkTreeViewColumn" id="column_second">
                                 <property name="resizable">True</property>
-                                <property name="sizing">autosize</property>
-                                <property name="title" translatable="yes">Second</property>
+                                <property name="sizing">fixed</property>
+                                <property name="title" translatable="yes">Volt</property>
                                 <property name="expand">True</property>
+                                <property name="reorderable">True</property>
                               </object>
                             </child>
                           </object>
                         </child>
                       </object>
                       <packing>
-                        <property name="expand">True</property>
+                        <property name="expand">False</property>
                         <property name="fill">True</property>
                         <property name="position">0</property>
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkLabel" id="label4">
+                      <object class="GtkImage" id="graphic">
+                        <property name="width_request">555</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="label" translatable="yes">label</property>
+                        <property name="margin_left">10</property>
+                        <property name="margin_right">10</property>
+                        <property name="stock">gtk-missing-image</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkBox" id="box3">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="margin_left">10</property>
+                        <property name="orientation">vertical</property>
+                        <child>
+                          <object class="GtkGrid" id="grid1">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="margin_top">8</property>
+                            <property name="row_spacing">32</property>
+                            <property name="column_spacing">13</property>
+                            <child>
+                              <object class="GtkLabel" id="label1">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="halign">end</property>
+                                <property name="label" translatable="yes">Temperatura de Cor da
+Lâmpada:</property>
+                                <property name="justify">right</property>
+                                <attributes>
+                                  <attribute name="weight" value="bold"/>
+                                </attributes>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="label6">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="halign">end</property>
+                                <property name="label" translatable="yes">Distância entre Lâmpada
+e Célula Fotovoltaica:</property>
+                                <property name="justify">right</property>
+                                <attributes>
+                                  <attribute name="weight" value="bold"/>
+                                </attributes>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">1</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="label7">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="halign">end</property>
+                                <property name="label" translatable="yes">Energia Consumida pela
+Célula Fotovoltaica:</property>
+                                <property name="justify">right</property>
+                                <attributes>
+                                  <attribute name="weight" value="bold"/>
+                                </attributes>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">4</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="label8">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="halign">end</property>
+                                <property name="label" translatable="yes">Energia gerada pela
+Célula Fotovoltaica:</property>
+                                <property name="justify">right</property>
+                                <attributes>
+                                  <attribute name="weight" value="bold"/>
+                                </attributes>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">3</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="label_powers_photocell">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="halign">start</property>
+                                <property name="label" translatable="yes">label</property>
+                                <attributes>
+                                  <attribute name="weight" value="bold"/>
+                                  <attribute name="foreground" value="#34346565a4a4"/>
+                                  <attribute name="size" value="13000"/>
+                                </attributes>
+                              </object>
+                              <packing>
+                                <property name="left_attach">1</property>
+                                <property name="top_attach">3</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="label_lamp_power">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="halign">start</property>
+                                <property name="label" translatable="yes">label</property>
+                                <attributes>
+                                  <attribute name="weight" value="bold"/>
+                                  <attribute name="foreground" value="#34346565a4a4"/>
+                                  <attribute name="size" value="13000"/>
+                                </attributes>
+                              </object>
+                              <packing>
+                                <property name="left_attach">1</property>
+                                <property name="top_attach">4</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="label_distance">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="halign">start</property>
+                                <property name="label" translatable="yes">label</property>
+                                <attributes>
+                                  <attribute name="weight" value="bold"/>
+                                  <attribute name="foreground" value="#34346565a4a4"/>
+                                  <attribute name="size" value="13000"/>
+                                </attributes>
+                              </object>
+                              <packing>
+                                <property name="left_attach">1</property>
+                                <property name="top_attach">1</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="label_lamp_color">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="halign">start</property>
+                                <property name="label" translatable="yes">label</property>
+                                <attributes>
+                                  <attribute name="weight" value="bold"/>
+                                  <attribute name="foreground" value="#34346565a4a4"/>
+                                  <attribute name="size" value="13000"/>
+                                </attributes>
+                              </object>
+                              <packing>
+                                <property name="left_attach">1</property>
+                                <property name="top_attach">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="label_">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="halign">end</property>
+                                <property name="label" translatable="yes">Material da Célula
+Fotovoltaica:</property>
+                                <property name="justify">right</property>
+                                <attributes>
+                                  <attribute name="style" value="normal"/>
+                                  <attribute name="weight" value="bold"/>
+                                </attributes>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">2</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="label_photocell">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="label" translatable="yes">label</property>
+                                <attributes>
+                                  <attribute name="weight" value="bold"/>
+                                  <attribute name="foreground" value="#34346565a4a4"/>
+                                  <attribute name="size" value="13000"/>
+                                </attributes>
+                              </object>
+                              <packing>
+                                <property name="left_attach">1</property>
+                                <property name="top_attach">2</property>
+                              </packing>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="label_percent_efficiency">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="label" translatable="yes">Percentual de Eficiência Energética da Célula Fotovoltaica</property>
+                            <attributes>
+                              <attribute name="style" value="normal"/>
+                              <attribute name="weight" value="bold"/>
+                              <attribute name="size" value="13000"/>
+                            </attributes>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="label9">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="label" translatable="yes">label</property>
+                          </object>
+                          <packing>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
+                            <property name="position">2</property>
+                          </packing>
+                        </child>
                       </object>
                       <packing>
                         <property name="expand">True</property>
                         <property name="fill">True</property>
-                        <property name="pack_type">end</property>
-                        <property name="position">1</property>
+                        <property name="position">2</property>
                       </packing>
                     </child>
                   </object>
@@ -158,19 +428,6 @@
                 <property name="expand">True</property>
                 <property name="fill">True</property>
                 <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="label1">
-                <property name="width_request">100</property>
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label" translatable="yes">label</property>
-              </object>
-              <packing>
-                <property name="expand">True</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
               </packing>
             </child>
           </object>

@@ -68,6 +68,11 @@ class WindowLoadResult:
 		
 		return self.set_results
 		
+	def set_controller_screen_new_experiment(self, controller_screen_new_experiment):
+		self.controller_screen_new_experiment = controller_screen_new_experiment
+		
+	def get_controller_screen_new_experiment(self):
+		return controller_screen_new_experiment
 '''
 windowResult = WindowLoadResult("../view/xml_windows/load_results.glade")
 

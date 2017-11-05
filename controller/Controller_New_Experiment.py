@@ -133,11 +133,13 @@ class Handler:
 		
 		thread2.start()
 		
-		# Inicializa a tela de resultados e a de espera, e passa o conjunto de dados recebidos para a tela de resultados
+		# Inicializa a tela de espera, e passa o conjunto de dados monitorados
 		self.screen_load_result = WindowLoadResult("../view/xml_windows/load_results.glade", wait_screen, set_results)
 		
+		self.screen_load_result.get_controller().set_controller_screen_new_experiment(self.controller)
+		
 		# Interrupção do sistema que atualizar a barra de loading no intervalo de 1 segundo
-		GObject.timeout_add(1000, self.screen_load_result.get_controller().fill_progress_bar, None)	
+		GObject.timeout_add(4000, self.screen_load_result.get_controller().fill_progress_bar, None)	
 		
 		self.screen_load_result.show_window()	
 	
@@ -176,6 +178,10 @@ class ControllerScreenExperiment:
 		Método que preenche as variaveis do objto com os dados extraídos do formulário
 	'''
 	def set_experiment(self):
+		active_lamp_color = self.get_screen_experiment().get_window().get_object_from_window("combobox_lamp_color").get_active_iter()
+		active_photocell = self.get_screen_experiment().get_window().get_object_from_window("combobox_photocell").get_active_iter()
+		active_distance = self.get_screen_experiment().get_window().get_object_from_window("combobox_distance").get_active_iter()
+
 		self.experiment = Experiment(\
 			self.get_screen_experiment().get_window().get_object_from_window("institution").get_text(),\
 			self.get_screen_experiment().get_window().get_object_from_window("course").get_text(),\
@@ -187,4 +193,17 @@ class ControllerScreenExperiment:
 			self.get_screen_experiment().convert_format_date_bd(self.get_screen_experiment().get_window().get_object_from_window("date").get_text()),\
 			self.get_screen_experiment().get_window().get_object_from_window("time").get_text(),\
 			self.get_screen_experiment().get_window().get_object_from_window("state_city").get_text(),\
+			self.get_screen_experiment().get_window().get_object_from_window("combobox_lamp_color").get_model().get_value(active_lamp_color,0),\
+			self.get_screen_experiment().get_window().get_object_from_window("combobox_photocell").get_model().get_value(active_photocell,0),\
+			self.get_screen_experiment().get_window().get_object_from_window("combobox_distance").get_model().get_value(active_distance,0),\
+			self.get_screen_experiment().get_window().get_object_from_window("lamps_power").get_text(),\
+			self.get_screen_experiment().get_window().get_object_from_window("const_time").get_text(),\
+			self.get_screen_experiment().get_window().get_object_from_window("volt_photocell").get_text(),\
 			self.get_screen_experiment().get_textbuffer(self.get_screen_experiment().get_window().get_object_from_window("description").get_buffer()))
+
+	'''
+		Método que retorna o objeto experimento
+	'''	
+	def get_experiment(self):
+		return self.experiment
+		

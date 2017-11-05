@@ -80,14 +80,8 @@ class WindowNewExperiment:
 		#
 		entry.set_text((str(now.hour) if (now.hour >= 10) else '0'+str(now.hour))+':'\
 			+(str(now.minute) if (now.minute >= 10) else '0'+str(now.minute))+':'\
-				+(str(now.second) if (now.second >= 10) else '0'+str(now.second)))					
+				+(str(now.second) if (now.second >= 10) else '0'+str(now.second)))				
 
-	'''
-		Método que retorna o objeto experimento
-	'''	
-	def get_experiment(self):
-		return self.experiment
-		
 	'''
 		Método que retorna o objeto window
 	'''

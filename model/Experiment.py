@@ -1,80 +1,127 @@
 class Experiment(object):
 		
-	def __init__(self, institution, course, student_class, teacher_name, student_name, experiment_name, code_experiment, date, time, city, description):	
-		self.student_name = student_name
-		self.teacher_name = teacher_name
-		self.description = description
+	def __init__(self, institution, course, student_class, \
+				teacher_name, student_name, experiment_name, \
+				code_experiment, date, time, \
+				city, lamps_color, type_photocell, \
+				distance_lamp_photocell, lamps_power, tau, \
+				volt_photocell, description):	
 		self.institution = institution
-		self.city = city
-		self.date = date
-		self.time = time
-		self.code_experiment = code_experiment
-		self.experiment_name = experiment_name
 		self.course = course
 		self.student_class = student_class
+		self.teacher_name = teacher_name
+		self.student_name = student_name
+		self.experiment_name = experiment_name
+		self.code_experiment = code_experiment
+		self.date = date
+		self.time = time
+		self.city = city
+		self.lamps_color = lamps_color
+		self.type_photocell = type_photocell
+		self.distance_lamp_photocell = distance_lamp_photocell
+		self.lamps_power = lamps_power
+		self.tau = tau
+		self.volt_photocell = volt_photocell
+		self.description = description
 		
-	def get_student_name(self):
-		return self.student_name
+	def set_institution(self, institution):
+		self.institution = institution
+
+	def get_institution(self):
+		return self.institution
+		
+	def set_course(self, course):
+		self.course = course
+
+	def get_course(self):
+		return self.course
+
+	def set_student_class(self, student_class):
+		self.student_class = student_class
+	
+	def get_student_class(self):
+		return self.student_class
+
+	def set_teacher_name(self, teacher_name):
+		self.teacher_name = teacher_name
 		
 	def get_teacher_name(self):
 		return self.teacher_name
 
-	def get_description(self):
-		return self.description
-		
-	def get_institution(self):
-		return self.institution
+	def set_student_name(self, student_name):
+		self.student_name = student_name
 
-	def get_city(self):
-		return self.city
+	def get_student_name(self):
+		return self.student_name	
+
+	def set_experiment_name(self, experiment_name):
+		self.experiment_name = experiment_name
+
+	def get_experiment_name(self):
+		return self.experiment_name
+
+	def set_code_experiment(self, code_experiment):
+		self.code_experiment = code_experiment
+		
+	def get_code_experiment(self):
+		return self.code_experiment
+
+	def set_date(self, date):
+		self.date = date		
 
 	def get_date(self):
 		return self.date
 	
+	def set_time(self, time):
+		self.time = time
+
 	def get_time(self):
 		return self.time
+			
+	def set_city(self, city):
+		self.city = city
 		
-	def get_code_experiment(self):
-		return self.code_experiment
-	
-	def get_experiment_name(self):
-		return self.experiment_name
+	def get_city(self):
+		return self.city		
 		
-	def get_course(self):
-		return self.course
-	
-	def get_student_class(self):
-		return self.student_class
-	
-	def set_student_name(self, student_name):
-		self.student_name = student_name
-	
-	def set_teacher_name(self, teacher_name):
-		self.teacher_name = teacher_name
+	def set_lamps_color(self, lamps_color):
+		self.lamps_color = lamps_color
 		
+	def get_lamps_color(self):
+		return self.lamps_color
+	
+	def set_type_photocell(self, type_photocell):
+		self.type_photocell = type_photocell
+	
+	def get_type_photocell(self):
+		return self.type_photocell
+	
+	def set_distance_lamp_photocell(self, distance_lamp_photocell):
+		self.distance_lamp_photocell = distance_lamp_photocell
+	
+	def get_distance_lamp_photocell(self):
+		return self.distance_lamp_photocell
+		
+	def set_lamp_power(self, lamps_power):	
+		self.lamps_power = lamps_power
+	
+	def get_lamp_power(self):
+		return self.lamps_power
+		
+	def set_tau(self, tau):
+		self.tau = tau
+		
+	def get_tau(self):
+		return self.tau
+		
+	def set_volt_photocell(self, volt_photocell):		
+		self.volt_photocell = volt_photocell
+		
+	def get_volt_photocell(self):
+		return self.volt_photocell
+
 	def set_description(self, description):
 		self.description = description
 	
-	def set_institution(self, institution):
-		self.institution = institution
-		
-	def set_city(self, city):
-		self.city = city
-	
-	def set_date(self, date):
-		self.date = date
-		
-	def set_time(self, time):
-		self.time = time
-		
-	def set_code_experiment(self, code_experiment):
-		self.code_experiment = code_experiment
-		
-	def set_experiment_name(self, experiment_name):
-		self.experiment_name = experiment_name
-	
-	def set_course(self, course):
-		self.course = course
-	
-	def set_student_class(self, student_class):
-		self.student_class = student_class
+	def get_description(self):
+		return self.description		

@@ -2,16 +2,17 @@
 # -*- coding: iso-8859-15 -*-
 
 import sys
+import matplotlib.pyplot as plt
 sys.path.append("../")
 from controller.Controller_Result_Experiment import ControllerScreenResultExperiment
-from Window import Main, Gtk
+from Window import Main, Gtk, GdkPixbuf
 
 controller = ControllerScreenResultExperiment()
 
 			
 class WindowResultExperiment:
 
-	def __init__(self, path, set_results):
+	def __init__(self, path, set_results, controller_screen_new_experiment):
 		
 		self.set_results = set_results
 		
@@ -25,6 +26,8 @@ class WindowResultExperiment:
 		
 		controller.set_screen_result_experiment(self)
 		
+		controller.set_controller_screen_new_experiment(controller_screen_new_experiment)
+		
 		self.window.set_name_object("result_window")
 		
 		self.set_table(self.window.get_object_from_window("tabela_resultados"))
@@ -34,6 +37,10 @@ class WindowResultExperiment:
 		self.create_columns()
 		
 		self.index = 0
+		
+		self.axis_x = []
+		
+		self.axis_y = []
 		
 		#set_results.print_set_results()
 		
@@ -45,10 +52,35 @@ class WindowResultExperiment:
 			for i in range(0,len(self.times_and_volts)-1):
 				self.times_and_volts[i] = self.times_and_volts[i].split(';')
 				self.insert_data_table(self.times_and_volts[i][0], self.times_and_volts[i][1])
-			
+				'''
+					add measurements datas to vector
+				'''
+				self.axis_x.append(self.times_and_volts[i][0])
+				self.axis_y.append(self.times_and_volts[i][1])
+
 			self.index += 1
+		'''
+			Create graphics from collected data, save it and show him in result screen
+		'''	
 		
+		plt.plot(self.axis_x,self.axis_y)
+		plt.xlabel('Time')
+		plt.ylabel('voltage')
+		plt.title('Capacitor Load Process')
+		plt.grid(True)
+		plt.tight_layout()
+		
+		plt.savefig("curva_capacitor.jpeg", dpi = 800)
+		graphic = self.window.get_object_from_window("graphic")
+		
+		#make picture
+		self.pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(filename="curva_capacitor.jpeg", width=700, height=500, preserve_aspect_ratio=True)
+		graphic.set_from_pixbuf(self.pixbuf)
+		#graphic.set_from_file("curva_capacitor.jpeg")
 			
+		
+		controller.fill_experiments_data()
+		
 		'''
 		#codigo teste preenchimento corpo texto
 		self.set_value_volt(4.9)
@@ -105,6 +137,15 @@ class WindowResultExperiment:
 	
 	def set_value_second(self, seconds):
 		self.second = seconds
+		
+	def get_control(self):
+		return self.controller
+		
+	'''
+		Método que retorna o objeto window
+	'''
+	def get_window(self):
+		return self.window
 
 #windowResult = WindowResultExperiment("../view/xml_windows/result_experiment.glade")
 

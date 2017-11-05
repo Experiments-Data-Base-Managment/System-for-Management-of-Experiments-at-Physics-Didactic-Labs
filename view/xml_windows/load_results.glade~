@@ -11,6 +11,7 @@
     <property name="window_position">center-always</property>
     <property name="default_width">440</property>
     <property name="default_height">250</property>
+    <property name="destroy_with_parent">True</property>
     <property name="gravity">center</property>
     <child>
       <object class="GtkBox" id="box1">

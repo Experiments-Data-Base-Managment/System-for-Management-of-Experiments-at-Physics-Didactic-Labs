@@ -28,6 +28,12 @@ class NewExperimentDAO(object):
 			date DATE NOT NULL,
 			time TEXT NOT NULL,
 			state_city TEXT NOT NULL,
+			lamps_color TEXT NOT NULL,
+			type_photocell TEXT NOT NULL,
+			distance_lamp_photocell TEXT NOT NULL,
+			lamps_power TEXT NOT NULL,
+			tau TEXT NOT NULL,
+			volt_photocell TEXT NOT NULL,
 			description TEXT NOT NULL
 		);
 		""")
@@ -43,11 +49,29 @@ class NewExperimentDAO(object):
 	def	 insert_table_experiments(self, experiment):
 		self.connection()
 		self.cursor.execute("""
-			INSERT INTO experiments (institution, course, class, teacher, student, experiment, id_experiment, date, time, state_city, description)
+			INSERT INTO experiments (institution,
+										course,
+										class,
+										teacher,
+										student,
+										experiment,
+										id_experiment,
+										date,
+										time,
+										state_city,
+										lamps_color,
+										type_photocell,
+										distance_lamp_photocell,
+										lamps_power,
+										tau,
+										volt_photocell,
+										description)
 			VALUES ("""'\''+ experiment.get_institution() + "\'," + '\'' + experiment.get_course() + "\'," + '\'' + experiment.get_student_class() \
 			+ "\'," + '\'' + experiment.get_teacher_name() + "\'," + '\'' + experiment.get_student_name() + "\'," + '\'' + experiment.get_experiment_name() \
 			+ "\'," + '\'' + experiment.get_code_experiment() + "\'," + '\'' + experiment.get_date() + "\'," + '\'' + experiment.get_time() \
-			+ "\'," + '\'' + experiment.get_city()+ "\'," + '\'' + experiment.get_description() + '\''""");
+			+ "\'," + '\'' + experiment.get_city()+ "\'," + '\'' + experiment.get_lamps_color()+ "\'," + '\'' + experiment.get_type_photocell() \
+			+ "\'," + '\'' + experiment.get_distance_lamp_photocell()+ "\'," + '\'' + experiment.get_lamps_power()+ "\'," + '\'' + experiment.get_tau() \
+			+ "\'," + '\'' + experiment.get_volt_photocell()+ "\'," + '\'' + experiment.get_description() + '\''""");
 			""")	
 		self.conn.commit()
 		self.close_connection()

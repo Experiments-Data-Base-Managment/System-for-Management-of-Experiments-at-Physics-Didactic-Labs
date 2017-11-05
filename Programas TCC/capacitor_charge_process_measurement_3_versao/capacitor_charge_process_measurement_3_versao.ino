@@ -7,13 +7,13 @@ struct Data_experiment{
   float volt;
 };
 
-const char END_TRANSMISSION = '0';
-const char START_EXPERIMENT = '1';
-const char DURATION_EXPERIMENT = '2'; 
-const float RESISTOR = 5e3;
+const char END_TRANSMISSION = 'e';
+const char START_EXPERIMENT = 's';
+const char DURATION_EXPERIMENT = 't'; 
+const float RESISTOR = 12e3;
 const float CAPACITOR = 3300e-6;
 const long TAU = 5*(RESISTOR*CAPACITOR);
-const unsigned int RESET_PIN = 3;
+const unsigned int RESET_PIN = 12;
 Data_experiment seconds_and_volts[5];
 int index = 0;
 volatile  int time_ = 0;
@@ -28,7 +28,7 @@ char signal_code = ' ';
  */
 void setup() {
   pinMode( RESET_PIN, OUTPUT );
-  Serial.begin( 14400 );
+  Serial.begin( 9600 );
   MsTimer2::set( 1000, measurement_time );
   digitalWrite( RESET_PIN, HIGH );
 }
@@ -100,6 +100,7 @@ void loop() {
     digitalWrite( RESET_PIN, HIGH );
     //delay(500);
     Serial.print(END_TRANSMISSION);
+    index = 0;
   }
   
 }

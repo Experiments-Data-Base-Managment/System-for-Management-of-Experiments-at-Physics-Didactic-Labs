@@ -6,11 +6,11 @@ import time
 
 class SerialCommunication:
 	
-	START = '1'
+	START = 's'
 	
-	END = '0'
+	END = 'e'
 	
-	REQUEST_DURATION = '2'
+	REQUEST_DURATION = 't'
 	
 	
 	'''
@@ -18,7 +18,7 @@ class SerialCommunication:
 	'''
 	def __init__(self):
 	
-		self.channel = serial.Serial('/dev/ttyACM0',14400)
+		self.channel = serial.Serial('/dev/ttyACM1',9600)
 	
 		time.sleep(1.8)
 		
