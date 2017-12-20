@@ -34,6 +34,8 @@ class NewExperimentDAO(object):
 			lamps_power TEXT NOT NULL,
 			tau TEXT NOT NULL,
 			volt_photocell TEXT NOT NULL,
+			resistor TEXT NOT NULL,
+			capacitor TEXT NOT NULL,
 			description TEXT NOT NULL
 		);
 		""")
@@ -65,41 +67,19 @@ class NewExperimentDAO(object):
 										lamps_power,
 										tau,
 										volt_photocell,
+										resistor,
+										capacitor,
 										description)
 			VALUES ("""'\''+ experiment.get_institution() + "\'," + '\'' + experiment.get_course() + "\'," + '\'' + experiment.get_student_class() \
 			+ "\'," + '\'' + experiment.get_teacher_name() + "\'," + '\'' + experiment.get_student_name() + "\'," + '\'' + experiment.get_experiment_name() \
 			+ "\'," + '\'' + experiment.get_code_experiment() + "\'," + '\'' + experiment.get_date() + "\'," + '\'' + experiment.get_time() \
 			+ "\'," + '\'' + experiment.get_city()+ "\'," + '\'' + experiment.get_lamps_color()+ "\'," + '\'' + experiment.get_type_photocell() \
 			+ "\'," + '\'' + experiment.get_distance_lamp_photocell()+ "\'," + '\'' + experiment.get_lamps_power()+ "\'," + '\'' + experiment.get_tau() \
-			+ "\'," + '\'' + experiment.get_volt_photocell()+ "\'," + '\'' + experiment.get_description() + '\''""");
+			+ "\'," + '\'' + experiment.get_volt_photocell()+ "\'," + '\'' + experiment.get_resistor()+ "\'," + '\'' + experiment.get_capacitor() \
+			+ "\'," + '\'' + experiment.get_description() + '\''""");
 			""")	
 		self.conn.commit()
 		self.close_connection()
-	
-	'''
-	def	 insert_table_experiments(\
-									self, \
-									institution, \
-									course, class_, \
-									teacher, student, \
-									experiment,\
-									id_experiment, \
-									date, \
-									time, \
-									state_city, \
-									description \
-								):
-		self.connection()
-		self.cursor.execute("""
-			INSERT INTO experiments (institution, course, class, teacher, student, experiment, id_experiment, date, time, state_city, description)
-			VALUES ("""'\''+ institution + "\'," + '\'' + course + "\'," + '\'' + class_ \
-			+ "\'," + '\'' + teacher + "\'," + '\'' + student + "\'," + '\'' + experiment \
-			+ "\'," + '\'' + id_experiment + "\'," + '\'' + date + "\'," + '\'' + time \
-			+ "\'," + '\'' + state_city+ "\'," + '\'' + description + '\''""");
-			""")	
-		self.conn.commit()
-		self.close_connection()
-	'''		
 		
 	def busca(self):
 		self.cursor.execute("""SELECT * FROM experiments;""")

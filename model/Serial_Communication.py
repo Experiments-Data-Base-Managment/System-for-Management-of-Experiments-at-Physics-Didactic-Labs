@@ -18,7 +18,7 @@ class SerialCommunication:
 	'''
 	def __init__(self):
 	
-		self.channel = serial.Serial('/dev/ttyACM1',9600)
+		self.channel = serial.Serial('/dev/ttyACM0',9600)
 	
 		time.sleep(1.8)
 		

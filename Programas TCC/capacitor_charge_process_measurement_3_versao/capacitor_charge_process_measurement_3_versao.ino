@@ -1,4 +1,3 @@
-
 #include <MsTimer2.h>
 
 struct Data_experiment{
@@ -28,6 +27,7 @@ char signal_code = ' ';
  */
 void setup() {
   pinMode( RESET_PIN, OUTPUT );
+  analogReference(EXTERNAL);
   Serial.begin( 9600 );
   MsTimer2::set( 1000, measurement_time );
   digitalWrite( RESET_PIN, HIGH );
@@ -86,6 +86,7 @@ void loop() {
    * o SMCD
    */
   if(time_ == TAU){
+    MsTimer2::stop();
     if(index != 0){
       for(int i = 0; i < index; i++){
         Serial.print(seconds_and_volts[i].second);
@@ -94,8 +95,8 @@ void loop() {
         Serial.print('|');
       }
     }
-    MsTimer2::stop();
     time_ = 0;
+    previous_time = 0;
     signal_code = ' ';
     digitalWrite( RESET_PIN, HIGH );
     //delay(500);
@@ -109,7 +110,7 @@ void loop() {
    * outro valor dentro da faixa de 0 a 5
    */
 float convertIntoVolts( float valor ){
-  return (valor*5.0)/1023;
+  return (valor*3.75)/1023;
 }
   /*
    * Rotina de interrupção que realiza a contagem do tempo

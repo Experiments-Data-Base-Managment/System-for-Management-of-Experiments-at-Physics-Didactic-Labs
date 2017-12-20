@@ -20,6 +20,8 @@ set_results = SetResults()
 
 wait_screen = WaitScreen()
 
+duration_of_experiment = ''
+
 class ThreadMonitoring(threading.Thread):
 	
 	def __init__(self):	
@@ -55,12 +57,12 @@ class ThreadMonitoring(threading.Thread):
 			
 		self.qnt_byte = self.port_serial.get_channel().in_waiting
 
-		self.duration_of_experiment = self.port_serial.receive(self.qnt_byte)
+		duration_of_experiment = self.port_serial.receive(self.qnt_byte)
 		
 		self.port_serial.get_channel().flush()
 		
 		# Adiciona o tempo de duração à tela de Loading
-		wait_screen.set_duration_experiment(self.duration_of_experiment)
+		wait_screen.set_duration_experiment(duration_of_experiment)
 		
 	'''
 		Método responsável por manter o polling na porta serial e pegar
@@ -110,7 +112,8 @@ class ThreadMonitoring(threading.Thread):
 				
 				# Verifica se o último par tempo-tensão foi recebido e, caso seja verdade encerrar o polling no buffer
 				if(self.times_measureds[len(self.times_measureds)-2][0] == wait_screen.get_duration_experiment()):
-					
+					self.port_serial.get_channel().flush()
+					self.port_serial.close_connection()
 					break
 		
 	def split_data(self, data):
@@ -197,9 +200,13 @@ class ControllerScreenExperiment:
 			self.get_screen_experiment().get_window().get_object_from_window("combobox_photocell").get_model().get_value(active_photocell,0),\
 			self.get_screen_experiment().get_window().get_object_from_window("combobox_distance").get_model().get_value(active_distance,0),\
 			self.get_screen_experiment().get_window().get_object_from_window("lamps_power").get_text(),\
-			self.get_screen_experiment().get_window().get_object_from_window("const_time").get_text(),\
 			self.get_screen_experiment().get_window().get_object_from_window("volt_photocell").get_text(),\
+			self.get_screen_experiment().get_window().get_object_from_window("resistor_rc").get_text(),\
+			self.get_screen_experiment().get_window().get_object_from_window("capacitor").get_text(),\
 			self.get_screen_experiment().get_textbuffer(self.get_screen_experiment().get_window().get_object_from_window("description").get_buffer()))
+			
+		self.experiment.set_duration(duration_of_experiment)
+		self.experiment.calc_tau()
 
 	'''
 		Método que retorna o objeto experimento

@@ -20,8 +20,8 @@ class Handler:
 		
 		self.controller_screen_load.get_screen_load_results().window.get_window().destroy()
 		
-		self.screen_result = WindowResultExperiment("../view/xml_windows/result_experiment.glade", self.controller_screen_load.get_screen_load_results().get_set_results(), self.controller_screen_load.get_controller_screen_new_experiment())
-						
+		self.screen_result = WindowResultExperiment("../view/xml_windows/result_experiment_(new_version).glade", self.controller_screen_load.get_screen_load_results().get_set_results(), self.controller_screen_load.get_controller_screen_new_experiment())
+
 		self.screen_result.show_window()
 		
 class ControllerScreenLoadResult:

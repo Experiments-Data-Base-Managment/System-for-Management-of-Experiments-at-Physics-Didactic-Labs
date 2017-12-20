@@ -30,9 +30,9 @@ class WindowResultExperiment:
 		
 		self.window.set_name_object("result_window")
 		
-		self.set_table(self.window.get_object_from_window("tabela_resultados"))
+		self.set_tables(self.window.get_object_from_window("tabela_resultados"),self.window.get_object_from_window("liststore_result_experiment"))
 	
-		self.set_tree_view(self.window.get_object_from_window("tree_view"))
+		self.set_tree_views(self.window.get_object_from_window("tree_view"),self.window.get_object_from_window("tree_view2"))
 	
 		self.create_columns()
 		
@@ -64,11 +64,12 @@ class WindowResultExperiment:
 		'''	
 		
 		plt.plot(self.axis_x,self.axis_y)
-		plt.xlabel('Time')
-		plt.ylabel('voltage')
-		plt.title('Capacitor Load Process')
+		plt.xlabel('Tempo')
+		plt.ylabel('Tensao')
+		plt.title('Processo de Carga do Capcitor')
 		plt.grid(True)
-		plt.tight_layout()
+		
+		#plt.tight_layout()
 		
 		plt.savefig("curva_capacitor.jpeg", dpi = 800)
 		graphic = self.window.get_object_from_window("graphic")
@@ -77,17 +78,12 @@ class WindowResultExperiment:
 		self.pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(filename="curva_capacitor.jpeg", width=700, height=500, preserve_aspect_ratio=True)
 		graphic.set_from_pixbuf(self.pixbuf)
 		#graphic.set_from_file("curva_capacitor.jpeg")
-			
+		
 		
 		controller.fill_experiments_data()
 		
-		'''
-		#codigo teste preenchimento corpo texto
-		self.set_value_volt(4.9)
-		self.set_value_second(25)
-		self.insert_data_table()
-		'''
-		
+		controller.fill_table_results()
+				
 	def show_window(self):
 		self.window.start_window()
 		Gtk.main()
@@ -96,42 +92,52 @@ class WindowResultExperiment:
 		Os métodos a partir deste ponto do código lidam com a estrutura de tabela
 		apresentada na tela de resultados.
 	'''
-	def set_table(self, table):	 
-		self.table = table
+	def set_tables(self, table_1, table_2):	 
+		self.table_1 = table_1
+		self.table_2 = table_2
 	
-	def set_tree_view(self, treeView):
-		self.treeView = treeView
+	def set_tree_views(self, tree_view_1, tree_view_2):
+		self.tree_view_1 = tree_view_1
+		self.tree_view_2 = tree_view_2
 	
 	'''
 		Método que cria o número de colunas da tabela de resultados e define o tipo de dado
 	'''
 	def create_columns(self):
-		cell = Gtk.CellRendererText()
-		self.treeView.get_column(0).pack_start(cell, False)
-		self.treeView.get_column(0).add_attribute(cell, "text", 0)
-		self.treeView.get_column(1).pack_start(cell, False)
-		self.treeView.get_column(1).add_attribute(cell, "text", 1)
-
+		
+		cell_tree_view_1 = Gtk.CellRendererText()
+		self.tree_view_1.get_column(0).pack_start(cell_tree_view_1, False)
+		self.tree_view_1.get_column(0).add_attribute(cell_tree_view_1, "text", 0)
+		self.tree_view_1.get_column(1).pack_start(cell_tree_view_1, False)
+		self.tree_view_1.get_column(1).add_attribute(cell_tree_view_1, "text", 1)
+		
+		cell_tree_view_2 = Gtk.CellRendererText()
+		self.tree_view_2.get_column(0).pack_start(cell_tree_view_2, False)
+		self.tree_view_2.get_column(0).add_attribute(cell_tree_view_2, "text", 0)
+		self.tree_view_2.get_column(1).pack_start(cell_tree_view_2, False)
+		self.tree_view_2.get_column(1).add_attribute(cell_tree_view_2, "text", 1)
+		
+		self.tree_view_2.get_column(2).pack_start(cell_tree_view_2, False)
+		self.tree_view_2.get_column(2).add_attribute(cell_tree_view_2, "text", 2)
+		self.tree_view_2.get_column(3).pack_start(cell_tree_view_2, False)
+		self.tree_view_2.get_column(3).add_attribute(cell_tree_view_2, "text", 3)
+		
+		self.tree_view_2.get_column(4).pack_start(cell_tree_view_2, False)
+		self.tree_view_2.get_column(4).add_attribute(cell_tree_view_2, "text", 4)
+		self.tree_view_2.get_column(5).pack_start(cell_tree_view_2, False)
+		self.tree_view_2.get_column(5).add_attribute(cell_tree_view_2, "text", 5)
+		
+		self.tree_view_2.get_column(6).pack_start(cell_tree_view_2, False)
+		self.tree_view_2.get_column(6).add_attribute(cell_tree_view_2, "text", 6)
+		self.tree_view_2.get_column(7).pack_start(cell_tree_view_2, False)
+		self.tree_view_2.get_column(7).add_attribute(cell_tree_view_2, "text", 7)
+		
+		self.tree_view_2.get_column(8).pack_start(cell_tree_view_2, False)
+		self.tree_view_2.get_column(8).add_attribute(cell_tree_view_2, "text", 8)
 	
 	def insert_data_table(self, volt, seconds):
-		'''
-			iter_tree = table.get_iter_first();		
-		
-			if( iter_tree != None):
-				iter_tree = self.table.insert_after(iter_tree,[self.volt,self.second])
-				self.table.row_changed(iter_tree,iter_tree)
-				print "There are rows in the table." \
-					+ str(self.table[iter_tree][0]) + " and " + str(self.table[iter_tree][1]) + "."
-			else:
-		'''
-		
-		iter_tree = self.table.prepend([volt,seconds])
-		
-		'''
-			self.table.row_changed(iter_tree,iter_tree)
-			print "Until this moment there wasn't row in the table, but now there is and its values is: " \
-			+ str(self.table[iter_tree][0]) + " and " + str(self.table[iter_tree][1])		
-		'''
+		iter_tree = self.table_1.prepend([volt,seconds])
+
 	def set_value_volt(self, volt):
 		self.volt = volt
 	
@@ -140,6 +146,12 @@ class WindowResultExperiment:
 		
 	def get_control(self):
 		return self.controller
+		
+	def get_table_results(self):
+		return self.table_2
+		
+	def get_set_results(self):
+		return self.set_results
 		
 	'''
 		Método que retorna o objeto window

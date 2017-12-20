@@ -1,11 +1,14 @@
+import math
+
 class Experiment(object):
 		
 	def __init__(self, institution, course, student_class, \
 				teacher_name, student_name, experiment_name, \
 				code_experiment, date, time, \
 				city, lamps_color, type_photocell, \
-				distance_lamp_photocell, lamps_power, tau, \
-				volt_photocell, description):	
+				distance_lamp_photocell, lamps_power, \
+				volt_photocell, resistor, capacitor, \
+				 description):	
 		self.institution = institution
 		self.course = course
 		self.student_class = student_class
@@ -20,9 +23,11 @@ class Experiment(object):
 		self.type_photocell = type_photocell
 		self.distance_lamp_photocell = distance_lamp_photocell
 		self.lamps_power = lamps_power
-		self.tau = tau
 		self.volt_photocell = volt_photocell
+		self.resistor = resistor
+		self.capacitor = capacitor
 		self.description = description
+		self.calc_tau()
 		
 	def set_institution(self, institution):
 		self.institution = institution
@@ -125,3 +130,36 @@ class Experiment(object):
 	
 	def get_description(self):
 		return self.description		
+	
+	def set_resisot(self, resistor):
+		self.resistor = resistor
+		
+	def get_resistor(self):
+		return self.resistor
+		
+	def set_capacitor(self, capacitor):
+		self.capacitor = capacitor
+		
+	def get_capacitor(self):
+		return self.capacitor
+	
+	def calc_tau(self):
+		self.tau = float(self.get_resistor()) * float(self.get_capacitor())
+	
+	def set_voltage_capacitor_tau(self, voltage):
+		self.volt_capacitor = voltage
+		
+	def get_voltage_capacitor_tau(self):
+		return float(self.volt_capacitor)
+		
+	def calc_energy_capacitor(self):
+		self.energy_capacitor = (float(self.get_capacitor()) * math.pow(float(self.get_voltage_capacitor_tau()),2) * 0.5)
+		
+	def get_energy_capacitor(self):
+		return self.energy_capacitor
+	
+	def set_duration(self, duration):
+		self.duration = duration
+		
+	def get_duration(self):
+		return duration
