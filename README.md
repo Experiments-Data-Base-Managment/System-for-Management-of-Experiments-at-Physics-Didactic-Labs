@@ -1,2 +1,2 @@
 # System-for-Management-of-Experiments-in-Physics-Didactic-Labs
-This repositorie was created like part of project Experimentos de Física, wich was development by a group of course Bacharelado em Sistemas de Informação students at the Universidade do Estado da Bahia. The aim's project is offer technology support to process of experiments' results managment that are make at Physics didactics laboratories.
+The project Experimentos de Física was development by a group of course Bachelor's Degree in Information Systems students at Universidade do Estado da Bahia. The aim's project is offer technology support to process of experiments' results managment that are make at Physics didactics laboratories.
